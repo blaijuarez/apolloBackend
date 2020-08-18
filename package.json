@@ -1,0 +1,22 @@
+{
+  "name": "crmgrapghql",
+  "version": "1.0.0",
+  "description": "Backend Apollo + Mongoose + GraphQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Blai Juárez",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.16.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.27"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
