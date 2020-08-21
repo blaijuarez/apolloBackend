@@ -25,7 +25,7 @@ const crearToken = (usuario, secreta, expiresIn) => {
 const resolvers = {
   Query: {
     // Usuarios
-    obtenerUsuario: async (_, {}, ctx) => {
+    obtenerUsuario: async (_, data, ctx) => {
       return ctx.usuario
     },
     // Productos
@@ -54,7 +54,7 @@ const resolvers = {
         console.log(error)
       }
     },
-    obtenerClientesVendedor: async (_, {}, ctx) => {
+    obtenerClientesVendedor: async (_, data, ctx) => {
       try {
         const clientes = await Cliente.find({
           vendedor: ctx.usuario.id.toString()
@@ -67,7 +67,7 @@ const resolvers = {
     obtenerCliente: async (_, { id }, ctx) => {
       // revisar si existe
       const cliente = await Cliente.findById(id)
-      if (!producto) {
+      if (!cliente) {
         throw new Error('Cliente no encontrado')
       }
 
@@ -87,7 +87,7 @@ const resolvers = {
         console.log(error)
       }
     },
-    obtenerPedidosVendedor: async (_, {}, ctx) => {
+    obtenerPedidosVendedor: async (_, data, ctx) => {
       try {
         const pedidos = await Pedido.find({ vendedor: ctx.usuario.id })
         return pedidos
@@ -95,7 +95,7 @@ const resolvers = {
         console.log(error)
       }
     },
-    obtenerPedido: async (_, {}, ctx) => {
+    obtenerPedido: async (_, { id }, ctx) => {
       // Verificar si existe pedido
       const pedido = await Pedido.findById(id)
       if (!pedido) {
@@ -107,7 +107,7 @@ const resolvers = {
         throw new Error('Acceso a cliente no autorizado')
       }
     },
-    obtenerPedidosEstado: async () => {
+    obtenerPedidosEstado: async (_, { estado }, ctx) => {
       const pedidos = await Pedido.find({ vendedor: ctx.usuario.id, estado })
       return pedidos
     },
@@ -342,7 +342,7 @@ const resolvers = {
       return resultado
     },
     actualizarPedido: async (_, { id, input }, ctx) => {
-      const { cliente } = input
+      const { pedido } = input
       // Si el pedido existe
       const existePedido = await Pedido.findById(id)
       if (!existePedido) {
@@ -361,8 +361,8 @@ const resolvers = {
       }
 
       // Revisar el Stock
-      if (input.pedido) {
-        for await (const articulo of input.pedido) {
+      if (pedido) {
+        for await (const articulo of pedido) {
           const { id } = articulo
           const producto = await Producto.findById(id)
           if (articulo.cantidad > producto.existencia) {
