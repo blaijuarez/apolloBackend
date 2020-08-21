@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const PedidoSchema = mongoose.Schema({
   pedido: {
     type: Array,
@@ -26,6 +26,6 @@ const PedidoSchema = mongoose.Schema({
     type: Date,
     default: Date.now()
   }
-});
+})
 
-module.exports = mongoose.model('Pedido', PedidoSchema);
+module.exports = mongoose.model('Pedido', PedidoSchema)

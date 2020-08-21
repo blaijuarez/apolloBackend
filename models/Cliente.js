@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const ClientesSchema = mongoose.Schema({
   nombre: {
     type: String,
@@ -34,6 +34,6 @@ const ClientesSchema = mongoose.Schema({
     required: true,
     ref: 'Usuario'
   }
-});
+})
 
-module.exports = mongoose.model('Cliente', ClientesSchema);
+module.exports = mongoose.model('Cliente', ClientesSchema)

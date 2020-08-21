@@ -1,21 +1,24 @@
-const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./db/schema');
-const resolvers = require('./db/resolvers');
-const conectarDB = require('./config/db');
-const jwt = require('jsonwebtoken');
+const { ApolloServer } = require('apollo-server')
+const typeDefs = require('./db/schema')
+const resolvers = require('./db/resolvers')
+const conectarDB = require('./config/db')
+const jwt = require('jsonwebtoken')
 
 // Conectar a la BBDD
-conectarDB();
+conectarDB()
 
 // servidor
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ ref }) => {
-    const token = req.headers['authorization'] || '';
+  context: async ({ req }) => {
+    const token = req.headers.authorization || ''
     if (token) {
       try {
-        const usuario = await jwt.verify(token, process.env.SECRETA);
+        const usuario = await jwt.verify(
+          token.replace('Bearer ', ''),
+          process.env.SECRETA
+        )
         return {
           usuario
         }
@@ -24,9 +27,9 @@ const server = new ApolloServer({
       }
     }
   }
-});
+})
 
 // Arrancar el servidor
 server.listen().then(({ url }) => {
-  console.log(`Servidor listo en la URL ${url}`);
-});
+  console.log(`Servidor listo en la URL ${url}`)
+})

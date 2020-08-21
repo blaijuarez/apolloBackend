@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server')
 // Schema
 const typeDefs = gql`
   type Usuario {
@@ -103,7 +103,7 @@ const typeDefs = gql`
 
   type Query {
     #Usuarios
-    obtenerUsuario(token: String!): Usuario
+    obtenerUsuario: Usuario
 
     #Productos
     obtenerProductos: [Producto]
@@ -111,7 +111,7 @@ const typeDefs = gql`
 
     #Clientes
     obtenerClientes: [Cliente]
-    obtenerClientesVendedor(id: ID!): [Cliente]
+    obtenerClientesVendedor: [Cliente]
     obtenerCliente(id: ID!): Cliente
 
     #Pedidos
@@ -123,7 +123,7 @@ const typeDefs = gql`
     # BUSQUEDAS AVANZADAS
     mejoresClientes: [TopCliente]
     mejoresVendedores: [TopVendedores]
-    buscarProducto(texto: String!): [producto]
+    buscarProducto(texto: String!): [Producto]
   }
 
   type Mutation {
@@ -146,6 +146,6 @@ const typeDefs = gql`
     actualizarPedido(id: ID!, input: PedidoInput): Pedido
     eliminarPedido(id: ID!): String
   }
-`;
+`
 
-module.exports = typeDefs;
+module.exports = typeDefs
