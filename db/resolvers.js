@@ -126,7 +126,7 @@ const resolvers = {
         {
           $lookup: {
             from: 'clientes',
-            localfield: '_id',
+            localField: '_id',
             foreignField: '_id',
             as: 'cliente'
           }
@@ -149,12 +149,12 @@ const resolvers = {
         {
           $lookup: {
             from: 'usuarios',
-            localfield: '_id',
+            localField: '_id',
             foreignField: '_id',
             as: 'vendedor'
           }
         },
-        { $limit: 3 },
+        { $limit: 8 },
         { $sort: { total: -1 } }
       ])
 
