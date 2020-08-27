@@ -231,7 +231,7 @@ const resolvers = {
       }
 
       // guardar en la base de datos
-      producto = producto.findOneAndUpdate({ _id: id }, input, { new: true })
+      producto = Producto.findOneAndUpdate({ _id: id }, input, { new: true })
       return producto
     },
     eliminarProducto: async (_, { id }) => {
