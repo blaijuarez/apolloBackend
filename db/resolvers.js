@@ -5,7 +5,7 @@ const Pedido = require('../models/Pedido')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-require('dotenv').config({ path: 'variables.env' })
+require('dotenv').config({ path: '.env.local' })
 
 const crearToken = (usuario, secreta, expiresIn) => {
   const { id, email, nombre, apellido } = usuario
